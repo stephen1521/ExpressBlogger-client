@@ -7,7 +7,7 @@ import HomePage from './pages/HomePage';
 import Layout from './layouts/Layout';
 import CreateBlogPage from './pages/CreateBlogPage';
 import SearchPage from './pages/SearchPage';
-import SingleMoviePage from './pages/SingleMoviePage';
+import SingleMoviePage from './components/SingleMovie';
 
 const urlEndPoint = process.env.REACT_APP_URL_ENDPOINT;
 

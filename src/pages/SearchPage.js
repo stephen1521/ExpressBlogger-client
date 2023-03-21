@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import SingleMoviePage from "./SingleMoviePage";
+import SingleMoviePage from "../components/SingleMovie";
 
 const SearchPage = (props) => {
     const [title, setTitle] = useState('');
