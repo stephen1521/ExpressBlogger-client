@@ -1,7 +1,7 @@
 const SingleMoviePage = (props) => {
    if(props.blog === undefined){
     return (
-        <p>Movie not found</p>
+        <p>Blog not found</p>
     )
    }else {
         return (
