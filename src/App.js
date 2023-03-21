@@ -6,6 +6,8 @@ import axios from 'axios';
 import HomePage from './pages/HomePage';
 import Layout from './layouts/Layout';
 import CreateBlogPage from './pages/CreateBlogPage';
+import SearchPage from './pages/SearchPage';
+import SingleMoviePage from './pages/SingleMoviePage';
 
 const urlEndPoint = process.env.REACT_APP_URL_ENDPOINT;
 
@@ -41,10 +43,23 @@ function App() {
 			  		/>
 				},	
 				{
-				path:'/CreateBlogPage',
-				element: <CreateBlogPage 
+					path:'/CreateBlogPage',
+					element: <CreateBlogPage 
+							urlEndPoint={urlEndPoint}
+						/>
+				},
+				{
+					path:'/SearchPage',
+					element: <SearchPage
+						blogList={blogList} 
 						urlEndPoint={urlEndPoint}
-					/>
+						/>,
+					children: [
+						{
+							path: "/SearchPage/:blog",
+							element: <SingleMoviePage />
+						}
+					]
 				}
 		  	]
 		}

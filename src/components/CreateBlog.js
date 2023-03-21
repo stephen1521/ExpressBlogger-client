@@ -5,7 +5,7 @@ const CreateBlog = (props) => {
     const [title, setTitle] = useState('');
     const [text, setText] = useState('');
     const [author, setAuthor] = useState('');
-    const [categories, setCategories] = useState('');
+    const [categories, setCategories] = useState([]);
 
     const onFormSubmit = async (e) => {
         e.preventDefault();
@@ -34,7 +34,7 @@ const CreateBlog = (props) => {
         setTitle('');
         setText('');
         setAuthor('');
-        setCategories('');
+        setCategories([]);
     }
 
     return (
@@ -51,13 +51,13 @@ const CreateBlog = (props) => {
                         name='text'
                         value={text}
                         onChange={e => setText(e.target.value)}/><br/>
-                <label htmlFor="Author">Author: </label>
+                <label htmlFor="author">Author: </label>
                 <input type='text'
                         id='author'
                         name='author'
                         value={author}
                         onChange={e => setAuthor(e.target.value)}/><br/>
-                <label htmlFor="Categories">Categories: </label>
+                <label htmlFor="categories">Categories: </label>
                 <input type='text'
                         id='categories'
                         name='categories'
