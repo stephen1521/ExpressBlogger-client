@@ -4,12 +4,13 @@ import { useState, useEffect } from 'react';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import axios from 'axios';
 import HomePage from './pages/HomePage';
-import Layout from './layouts/Layout'
+import Layout from './layouts/Layout';
+import CreateBlogPage from './pages/CreateBlogPage';
 
 const urlEndPoint = process.env.REACT_APP_URL_ENDPOINT;
 
 function App() {
-	const [blogList, setBlogList] = useState([]);
+	const [blogList, setBlogList] = useState();
 	const [shouldRefresh, setShouldRefresh] = useState(false);
 	useEffect(() => {
 		axios.get(`${urlEndPoint}/blogs/all`)
@@ -24,9 +25,8 @@ function App() {
 		  // always executed
 		});
 	  
-	  },[])
+	  }, [])
 
-	
 	const router = createBrowserRouter([
 		{
 		  	path: "/",
@@ -39,9 +39,14 @@ function App() {
 						urlEndPoint={urlEndPoint} 
 						setShouldRefresh={setShouldRefresh}
 			  		/>
+				},	
+				{
+				path:'/CreateBlogPage',
+				element: <CreateBlogPage 
+						urlEndPoint={urlEndPoint}
+					/>
 				}
-		  ]
-	
+		  	]
 		}
 	  ])
 
