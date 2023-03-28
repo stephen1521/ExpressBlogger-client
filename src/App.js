@@ -7,17 +7,19 @@ import HomePage from './pages/HomePage';
 import Layout from './layouts/Layout';
 import CreateBlogPage from './pages/CreateBlogPage';
 import SearchPage from './pages/SearchPage';
-import SingleMoviePage from './components/SingleMovie';
+import SingleMoviePage from './components/SingleBlog';
+import LoginPage from "./pages/LoginPage";
+import RegistrationPage from "./pages/RegistrationPage";
 
 const urlEndPoint = process.env.REACT_APP_URL_ENDPOINT;
 
 function App() {
 	const [blogList, setBlogList] = useState();
+	const [userList, setUserList] = useState();
 	const [shouldRefresh, setShouldRefresh] = useState(false);
 	useEffect(() => {
 		axios.get(`${urlEndPoint}/blogs/all`)
 			.then(function (response) {
-		  		console.log(response);
 		  		setBlogList(response.data.blogs);
 		})
 		.catch(function (error) {
@@ -26,9 +28,20 @@ function App() {
 		.finally(function () {
 		  // always executed
 		});
-	  
 	  }, [])
 
+	useEffect(() => {
+		axios.get(`${urlEndPoint}/users/all`)
+			.then(function (response) {
+				setUserList(response.data.users);
+			})
+			.catch(function (error){
+				console.log(error);
+			})
+			.finally(function (){
+
+			})
+	}, [])
 	const router = createBrowserRouter([
 		{
 		  	path: "/",
@@ -51,7 +64,8 @@ function App() {
 				{
 					path:'/SearchPage',
 					element: <SearchPage
-						blogList={blogList} 
+						blogList={blogList}
+						userList={userList} 
 						urlEndPoint={urlEndPoint}
 						/>,
 					children: [
@@ -60,6 +74,14 @@ function App() {
 							element: <SingleMoviePage />
 						}
 					]
+				},
+				{
+					path: "login",
+					element: <LoginPage />
+				},
+				{
+					path: "registration",
+					element: <RegistrationPage />
 				}
 		  	]
 		}

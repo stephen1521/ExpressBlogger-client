@@ -1,4 +1,4 @@
-const SingleMoviePage = (props) => {
+const SingleBlogPage = (props) => {
    if(props.blog === undefined){
     return (
         <p>Blog not found</p>
@@ -16,4 +16,4 @@ const SingleMoviePage = (props) => {
    }
 }
 
-export default SingleMoviePage;
+export default SingleBlogPage;
