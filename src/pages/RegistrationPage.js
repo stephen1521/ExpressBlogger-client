@@ -40,6 +40,11 @@ const RegistrationPage = (props) => {
                 }}
             >Signup
             </button>
+            <br></br>
+            <p>Already have an account, click below to go to the login page.</p>
+            <button onClick={() => {
+                navigate('/login')
+            }}>LoginPage</button>
         </div>
     );
 };

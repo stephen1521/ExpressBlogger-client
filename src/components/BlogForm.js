@@ -98,17 +98,17 @@ const BlogForm = (props) => {
                 <p>CreatedAt: {createdAt}</p>
                 {!isEditing && 
                     <button onClick={() => setIsEditing(true)}>
-                    Edit Movie
+                    Edit Blog
                     </button>}
                 {isEditing && 
                     <button onClick={() => {
                         setIsEditing(false);
                         handleUpdateBlog();
                     }}>
-                    Update Movie
+                    Update Blog
                     </button>}
                 <button onClick={() => handleDeleteBlog()}>
-                    Delete Movie
+                    Delete Blog
                 </button>
             </div>
         )

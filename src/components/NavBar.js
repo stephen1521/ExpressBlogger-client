@@ -9,8 +9,6 @@ const NavBar = () => {
             <Link to="/">Home</Link>
             <Link to="/CreateBlogPage">Create Blog</Link>
             <Link to="/SearchPage">Search</Link>
-            <Link to="/registration">Registration Form</Link>
-			<Link to="/login">Login Form</Link>
 			<button onClick={()=>{
 				    auth.logout()
 			}}>Logout</button>

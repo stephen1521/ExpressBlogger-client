@@ -40,6 +40,11 @@ const LoginPage = (props) => {
                 }}
             >Login
             </button>
+            <br></br>
+            <p>Need to create an account, click below to create one.</p>
+            <button onClick={() => {
+                navigate('/registration')
+            }}>RegistrationPage</button>
         </div>
     );
 };

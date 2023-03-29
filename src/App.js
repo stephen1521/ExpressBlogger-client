@@ -1,5 +1,4 @@
 import './App.css';
-
 import { useState, useEffect } from 'react';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import axios from 'axios';
@@ -10,12 +9,12 @@ import SearchPage from './pages/SearchPage';
 import SingleMoviePage from './components/SingleBlog';
 import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage";
-
 const urlEndPoint = process.env.REACT_APP_URL_ENDPOINT;
 
+
 function App() {
-	const [blogList, setBlogList] = useState();
-	const [userList, setUserList] = useState();
+	const [blogList, setBlogList] = useState([]);
+	const [userList, setUserList] = useState([]);
 	const [shouldRefresh, setShouldRefresh] = useState(false);
 	useEffect(() => {
 		axios.get(`${urlEndPoint}/blogs/all`)
@@ -28,8 +27,7 @@ function App() {
 		.finally(function () {
 		  // always executed
 		});
-	  }, [])
-
+	  }, [shouldRefresh])
 	useEffect(() => {
 		axios.get(`${urlEndPoint}/users/all`)
 			.then(function (response) {
@@ -39,9 +37,8 @@ function App() {
 				console.log(error);
 			})
 			.finally(function (){
-
 			})
-	}, [])
+	}, [shouldRefresh])
 	const router = createBrowserRouter([
 		{
 		  	path: "/",
