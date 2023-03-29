@@ -9,6 +9,7 @@ import SearchPage from './pages/SearchPage';
 import SingleMoviePage from './components/SingleBlog';
 import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage";
+import UpdateUserPage from './pages/UpdateUserPage';
 const urlEndPoint = process.env.REACT_APP_URL_ENDPOINT;
 
 
@@ -79,6 +80,11 @@ function App() {
 				{
 					path: "registration",
 					element: <RegistrationPage />
+				},
+				{
+					path:'UpdateUserPage',
+					element: <UpdateUserPage 
+							urlEndPoint={urlEndPoint}/>
 				}
 		  	]
 		}

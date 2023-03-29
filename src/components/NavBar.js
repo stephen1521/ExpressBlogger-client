@@ -9,9 +9,10 @@ const NavBar = () => {
             <Link to="/">Home</Link>
             <Link to="/CreateBlogPage">Create Blog</Link>
             <Link to="/SearchPage">Search</Link>
-			<button onClick={()=>{
+            <Link to="/UpdateUserPage">Update User</Link>
+			{auth.userEmail && <button onClick={()=>{
 				    auth.logout()
-			}}>Logout</button>
+			}}>Logout</button>}
         </div>
     )
 }

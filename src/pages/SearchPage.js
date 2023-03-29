@@ -1,9 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import SingleBlogPage from "../components/SingleBlog";
 import SingleUserPage from "../components/SingleUser";
 import { useAuth } from "../Hooks/Auth";
-const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT
 
 const SearchPage = (props) => {
     const [input, setInput] = useState('');
@@ -13,32 +12,8 @@ const SearchPage = (props) => {
     const [selectedOption, setSelectedOption] = useState();
     const [userExist, setUserExist] = useState(false);
     const [user, setUser] = useState();
-
-    const [status, setStatus] = useState(false);
 	const auth = useAuth()
-	useEffect(()=>{
-		const fetchStatus = async () => {
-			const headers = {
-				"Content-Type": "application/json",
-				// [process.env.REACT_APP_TOKEN_HEADER_KEY]: auth.userToken
-			}
-			headers[process.env.REACT_APP_TOKEN_HEADER_KEY] = auth.userToken
-			// headers.process.env.REACT_APP_TOKEN_HEADER_KEY = auth.userToken
-			const response = await fetch(`${urlEndpoint}/users/message`, {
-				method: "GET",
-				headers: headers,
-			});
-			const responseJSON = await response.json();
-			setStatus(responseJSON.message)
-		}
-		if (auth.userToken !== null) {
-			fetchStatus()
-		}
-		if (auth.userToken === null) {
-			setStatus(false)
-		}
-	}, [auth.userToken])
-    
+	
     const handleSubmit = () => {
         if(selectedOption === 'blogs'){
             const blog = props.blogList.find((blog) => {
@@ -72,16 +47,16 @@ const SearchPage = (props) => {
 
     return (
         <div>
-            {!status && <p>You need to create an account to search for blogs or users, click below to create an account or login.</p>}
-            {!status && <button onClick={() => {
+            {!auth.userEmail && <p>You need to create an account to search for blogs or users, click below to create an account or login.</p>}
+            {!auth.userEmail && <button onClick={() => {
                 navigate('/registration');
             }}>RegistrationPage</button>}
-            {!status && <button onClick={() => {
+            {!auth.userEmail && <button onClick={() => {
                 navigate('/login');
             }}>LoginPage</button>}
             <h1>Search</h1>
-            {status && <label>Search by: </label>}
-            {status && <div className="radio">
+            {auth.userEmail && <label>Search by: </label>}
+            {auth.userEmail && <div className="radio">
                 <label>
                 <input type="radio" value="blogs" 
                       checked={selectedOption === 'blogs'} 
@@ -89,7 +64,7 @@ const SearchPage = (props) => {
                 Blogs
                 </label>
             </div>}
-            {status && <div className="radio">
+            {auth.userEmail && <div className="radio">
                 <label>
                 <input type="radio" value="users" 
                       checked={selectedOption === 'users'} 
@@ -97,13 +72,13 @@ const SearchPage = (props) => {
                 Users
                 </label>
             </div>}
-            {status && <input type='text'
+            {auth.userEmail && <input type='text'
                         id='input'
                         name='input'
                         value={input}
                         onChange={(e)=>{setInput(e.target.value)}}
                         />}
-            {status && <button onClick={(e) => {
+            {auth.userEmail && <button onClick={(e) => {
                 e.preventDefault()
                 handleSubmit()}}>Submit
                 </button>}
